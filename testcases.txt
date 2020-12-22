@@ -1,0 +1,132 @@
+Testcase1:
+    - Description: to test if the strings are read and tokenized properly, 
+                   and also want to test if the probability and count work properly.
+    - Testcase file:
+    -------------------------------------------------
+        boba-tea TaroMT taromgt TAROMGT 
+    cocoa-creamwow oreo-wow oreo-wow OREO-WOW
+    OREO'-WOW 
+    BLACKTEA
+    black'tea
+    OOlongMT!!!!!!
+    OOlong88888MT
+    BubbleOOlongMT
+            HErbal!!!!!jelly-MT
+    herbal~~Jelly-MT
+    HERBALWOW  taroMT TaroMT'''''
+    taroMGT
+    Thaimt THAIMT THAIMt66
+    767 ''' !#@
+    peachoolong
+    peACHOOlongtea
+    Pineapple slush
+    -------------------------------------------------
+    output:
+    Token: blacktea                      Count: 2   Prob: 0.074
+    Token: boba-tea                      Count: 1   Prob: 0.037
+    Token: bubbleoolongmt                Count: 1   Prob: 0.037
+    Token: cocoa-creamwow                Count: 1   Prob: 0.037
+    Token: herbaljelly-mt                Count: 2   Prob: 0.074
+    Token: herbalwow                     Count: 1   Prob: 0.037
+    Token: oolongmt                      Count: 2   Prob: 0.074
+    Token: oreo-wow                      Count: 4   Prob: 0.148
+    Token: peachoolong                   Count: 1   Prob: 0.037
+    Token: peachoolongtea                Count: 1   Prob: 0.037
+    Token: pineapple                     Count: 1   Prob: 0.037
+    Token: slush                         Count: 1   Prob: 0.037
+    Token: taromgt                       Count: 3   Prob: 0.111
+    Token: taromt                        Count: 3   Prob: 0.111
+
+=======================================================================
+Testcase2:
+    - Description: to test if all the files and directories opened correctly in the threads
+                   all the files and direcrories should be opened randomly
+    - Testcase:
+    folder tree:
+    /ilab/users/hk795/test
+    ├── a
+    │   ├── a_1
+    │   │   └── a_1_1.txt
+    │   ├── a_2
+    │   └── a_3
+    ├── b
+    │   ├── b_1
+    │   │   ├── b_1_1.txt
+    │   │   └── b_1_2.txt
+    │   ├── b_2
+    │   │   └── b_2_1.txt
+    │   ├── b_3
+    │   ├── b_4
+    │   └── b_5
+    ├── c
+    ├── c_1.txt
+    ├── c_2.txt
+    ├── c_3.txt
+    └── e
+    -------------------------------------------------
+    ./detector  "/ilab/users/hk795/test"
+    output:
+    Dir     Path:/ilab/users/hk795/test/a      
+    Dir     Path:/ilab/users/hk795/test/b      
+    Dir     Path:/ilab/users/hk795/test/c      
+    Dir     Path:/ilab/users/hk795/test/a/a_1  
+    Dir     Path:/ilab/users/hk795/test/e      
+    Dir     Path:/ilab/users/hk795/test/a/a_2  
+    Dir     Path:/ilab/users/hk795/test/b/b_1  
+    File    Path:/ilab/users/hk795/test/c_1.txt
+    File    Path:/ilab/users/hk795/test/c_2.txt
+    Dir     Path:/ilab/users/hk795/test/a/a_3  
+    Dir     Path:/ilab/users/hk795/test/b/b_2  
+    File    Path:/ilab/users/hk795/test/a/a_1/a_1_1.txt
+    File    Path:/ilab/users/hk795/test/c_3.txt
+    Dir     Path:/ilab/users/hk795/test/b/b_3  
+    Dir     Path:/ilab/users/hk795/test/b/b_4  
+    File    Path:/ilab/users/hk795/test/b/b_2/b_2_1.txt
+    Dir     Path:/ilab/users/hk795/test/b/b_5  
+    File    Path:/ilab/users/hk795/test/b/b_1/b_1_1.txt
+    File    Path:/ilab/users/hk795/test/b/b_1/b_1_2.txt
+
+=======================================================================
+Testcase3:
+    - Description: to test if JSD being computed properly and the output format properly
+    - output:
+    JSD    FILES                          TOKENS  
+    0.301  "c_1.txt" and "b_1_1.txt"       72
+    0.301  "c_1.txt" and "c_3.txt"         72
+    0.301  "c_1.txt" and "b_1_2.txt"       73
+    0.301  "c_1.txt" and "b_2_1.txt"       73
+    0.301  "c_1.txt" and "c_2.txt"         76
+    0.000  "c_3.txt" and "b_1_1.txt"       90
+    0.258  "b_1_1.txt" and "b_1_2.txt"     91
+    0.258  "b_1_1.txt" and "b_2_1.txt"     91
+    0.258  "c_3.txt" and "b_1_2.txt"       91
+    0.258  "c_3.txt" and "b_2_1.txt"       91
+    0.000  "b_2_1.txt" and "b_1_2.txt"     92
+    0.262  "b_1_1.txt" and "c_2.txt"       94
+    0.262  "c_3.txt" and "c_2.txt"         94
+    0.269  "b_1_2.txt" and "c_2.txt"       95
+    0.269  "b_2_1.txt" and "c_2.txt"       95
+    0.301  "c_1.txt" and "a_1_1.txt"       136
+    0.218  "b_1_1.txt" and "a_1_1.txt"     154
+    0.218  "c_3.txt" and "a_1_1.txt"       154
+    0.220  "b_1_2.txt" and "a_1_1.txt"     155
+    0.220  "b_2_1.txt" and "a_1_1.txt"     155
+    0.243  "c_2.txt" and "a_1_1.txt"       158
+=======================================================================
+Testcase4:
+    - Description: to test if the invalid initial path or no file or only one file under the path
+    - output:
+        - invalid initial path
+            ./detector  "/ilab/users/hk795/test/f"
+            Error: could not open current directory: /ilab/users/hk795/test/f
+        - only one file under the path
+            ./detector  "/ilab/users/hk795/test/a/a_1"
+            Error:There is only one files in the the target directory and its subdirectories!
+        - no file under the path
+            ./detector  "/ilab/users/hk795/test/e"
+            Error:There is no file in the the target directory and its subdirectories!
+=======================================================================
+Testcase5:
+    - Description: to test if a large directory contains many files and subdirectories works properly
+    - Result: yes, works fine
+
