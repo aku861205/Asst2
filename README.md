@@ -27,3 +27,5 @@ KLD(First∣∣Mean)=∑ First(x)∗log(First(x)/Mean(x))
 KLD(Second∣∣Mean)=∑Second (x)∗log(Second (x)/Mean(x))
 \
 JSD = (KLD(First)+ KLD(Second)) / 2;
+
+![data structure](ds.png)
